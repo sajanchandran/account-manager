@@ -48,4 +48,11 @@ public class UserRepositoryTest {
 		assertTrue(new Long(1234).equals(value.get(2)));
 	}		
 	
+	@Test
+	public void deleteUserWorksCorrectly(){
+		Mockito.reset(mockJdbcTemplate);
+		Mockito.when(mockJdbcTemplate.update(Mockito.eq("delete user where id = ?"), (Object[])Mockito.any())).thenReturn(1);
+		int noOfRecords = userRepository.deleteUser(123L);
+		assertTrue(noOfRecords == 1);
+	}	
 }

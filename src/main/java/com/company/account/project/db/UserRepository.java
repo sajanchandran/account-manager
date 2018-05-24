@@ -31,5 +31,9 @@ public class UserRepository {
 
 	public int createUser(String firstName, String secondName, Long accountNumber) {
 		return jdbcTemplate.update("insert into user (first_name, second_name, account_number) values (?, ?, ?)", new Object[]{firstName, secondName, accountNumber});
+	}
+
+	public int deleteUser(long l) {
+		return 0;
 	}	
 }

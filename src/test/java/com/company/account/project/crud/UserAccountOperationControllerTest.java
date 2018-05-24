@@ -3,6 +3,7 @@ package com.company.account.project.crud;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,6 +56,13 @@ public class UserAccountOperationControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().json("{\"message\":\"Account has been successfully added\"}"));
 	}
+	
+	@Test
+	public void deleteAccount() throws Exception {
+		given(this.userRepository.deleteUser(123L)).willReturn(1);
+		accountOperationController.perform(delete("/rest/account/json/123")).andExpect(status().isOk())
+				.andExpect(content().json("{\"message\":\"Account successfully deleted\"}"));
+	}	
 	
 	private User buildUser() {
 		User user = new User();
