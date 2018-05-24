@@ -24,15 +24,29 @@ public class UserRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
+	/** Retrieve all users.
+	 * 
+	 * @return
+	 */
 	public List<User> getAll(){
 		return jdbcTemplate.query("select * from User", new BeanPropertyRowMapper<User>(User.class));
 	}
 	
 
+	/** Create user.
+	 * @param firstName
+	 * @param secondName
+	 * @param accountNumber
+	 * @return noofrecordsaffected
+	 */
 	public int createUser(String firstName, String secondName, Long accountNumber) {
 		return jdbcTemplate.update("insert into user (first_name, second_name, account_number) values (?, ?, ?)", new Object[]{firstName, secondName, accountNumber});
 	}
 
+	/** Delete user.
+	 * @param id
+	 * @return noofrecordsaffected
+	 */
 	public int deleteUser(Long id) {
 		return jdbcTemplate.update("delete user where id = ?", new Object[]{id});
 	}	
