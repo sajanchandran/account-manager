@@ -33,7 +33,7 @@ public class UserRepository {
 		return jdbcTemplate.update("insert into user (first_name, second_name, account_number) values (?, ?, ?)", new Object[]{firstName, secondName, accountNumber});
 	}
 
-	public int deleteUser(long l) {
-		return 0;
+	public int deleteUser(Long id) {
+		return jdbcTemplate.update("delete user where id = ?", new Object[]{id});
 	}	
 }
